@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -18,6 +19,12 @@ public class RoomEntity extends AutoDate {
     private Long id;
     private String name;
     private Long createBy;
+
+    public void update(String name) {
+        if(!Objects.equals(this.name, name) && name != null) {
+            this.name = name;
+        }
+    }
 
     @Builder
     public RoomEntity(Long id, String name, Long createBy,

@@ -16,4 +16,11 @@ public class RoomRequestDto {
                     .build();
         }
     }
+
+    @Getter
+    public static class update {
+        private Long id;
+        private String name;
+        private Long createBy;
+    }
 }
