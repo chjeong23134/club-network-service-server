@@ -43,15 +43,16 @@ public class AuthService {
 
         return JwtDto.builder()
                 .accessJwt("")
+                .user(userRepository.findByEmail(req.getEmail()))
                 .build();
     }
 
-    public void signUp(UserRequestDto.SignUp req) {
+    public UserEntity signUp(UserRequestDto.SignUp req) {
         UserEntity user = UserEntity.builder()
                 .email(req.getEmail())
                 .password(passwordEncoder.encode(req.getPassword()))
                 .name(req.getName())
                 .build();
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 }

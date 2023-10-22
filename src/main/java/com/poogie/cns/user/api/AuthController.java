@@ -2,16 +2,15 @@ package com.poogie.cns.user.api;
 
 import com.poogie.cns.security.JwtDto;
 import com.poogie.cns.user.dao.AuthService;
+import com.poogie.cns.user.domain.UserEntity;
 import com.poogie.cns.user.dto.UserRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
@@ -23,8 +22,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<HttpStatus> signUp(@RequestBody UserRequestDto.SignUp req) {
-        authService.signUp(req);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<UserEntity> signUp(@RequestBody UserRequestDto.SignUp req) {
+        return new ResponseEntity<>(authService.signUp(req), HttpStatus.OK);
     }
 }
