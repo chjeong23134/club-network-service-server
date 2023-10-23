@@ -38,12 +38,13 @@ public class AuthService {
 
             return JwtDto.builder()
                     .accessJwt(jwtProvider.create(userDetails))
+                    .user(userRepository.findByEmail(req.getEmail()))
                     .build();
         }
 
         return JwtDto.builder()
-                .accessJwt("")
-                .user(userRepository.findByEmail(req.getEmail()))
+                .accessJwt(null)
+                .user(null)
                 .build();
     }
 
